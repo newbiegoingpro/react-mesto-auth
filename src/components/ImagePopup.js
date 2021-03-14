@@ -1,8 +1,8 @@
 import { render } from "@testing-library/react"
 import add from '../images/add-button.svg';
-function PopupWithImage(props){
+function ImagePopup(props){
 
-   console.log(props)
+   
 
     return(
         <div className={`popup closeupPopup ${props.card ? 'popup_opened' : ' '}`} >
@@ -18,4 +18,4 @@ function PopupWithImage(props){
         </div>
     )
 }
-export default PopupWithImage
+export default ImagePopup
