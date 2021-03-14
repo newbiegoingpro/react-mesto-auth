@@ -1,0 +1,8 @@
+.gallery__like-counter{
+    margin: 0;
+    padding-top: 3px;
+    color: black;
+    width: 21px;
+    height: 17px;
+    text-align: center;
+}

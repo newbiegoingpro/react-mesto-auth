@@ -1,0 +1,10 @@
+.closeupPopup__pic{
+    max-width: 75vw;
+    max-height: 75vh;
+    
+    top: 50%;
+    left: 50%;
+    align-self: center;
+    z-index: 1000000;
+    
+}

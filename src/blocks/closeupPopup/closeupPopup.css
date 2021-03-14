@@ -1,0 +1,17 @@
+@import url(./__pic/closeupPopup__pic.css);
+@import url(./_opened/closeupPopup_opened.css);
+@import url(./__text/closeupPopup__text.css);
+@import url(./__container/closeupPopup__container.css);
+.closeupPopup{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s linear;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+    
+}

@@ -1,0 +1,16 @@
+.gallery__delete-button{
+    cursor: pointer;
+    border: none;
+    
+    background-color: none;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 18px;
+    right: 15px;
+    width: 18px;
+    height: 19px;
+    outline: none;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+}

@@ -1,0 +1,32 @@
+@import url(./__item/gallery__item.css);
+@import url(./__pic/gallery__pic.css);
+@import url(./__like-button/gallery__like-button.css);
+@import url(./__text-container/gallery__text-container.css);
+@import url(./__like-button_active/gallery__like-button_active.css);
+@import url(./__text/gallery__text.css);
+@import url(./__delete-button/gallery__delete-button.css);
+@import url(./__delete-button-pic/gallery__delete-button-pic.css);
+@import url(./__item_deleted/gallery__item_deleted.css);
+@import url(./__like-container/gallery__like-container.css);
+@import url(./__like-counter/gallery__like-counter.css);
+.gallery{
+    width: 100%;
+    margin-top: 47.25px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+
+
+@media screen and (max-width: 639px){
+    .gallery{
+        justify-content: center;
+        flex-direction: column;
+        margin-top: 36px;
+    }
+}
+
+
+

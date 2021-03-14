@@ -1,0 +1,19 @@
+.gallery__like-button{
+    align-self: center;
+    margin-left: auto;
+    padding-right: 23px;
+    width: 21px;
+    height: 17px;
+    background-image: url(../../../images/VectorLike.svg);
+    background-repeat: no-repeat;
+    border: none;
+    background-color: white;
+    outline: none;
+    
+}
+
+.gallery__like-button:hover{
+    cursor: pointer;
+    opacity: .5;
+}
+

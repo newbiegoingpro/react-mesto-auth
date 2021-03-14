@@ -1,0 +1,7 @@
+.popup__input-error_active{
+    visibility: visible;
+    color: red;
+    font-size: 12px;
+    margin-left: 8.3%;
+    width: 83.255%;
+}

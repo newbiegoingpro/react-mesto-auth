@@ -1,0 +1,14 @@
+.popup__close-button-image{
+    z-index: 1;
+    height: 40px;
+    width: 40px;
+    transform: rotate(45deg);
+    align-self: flex-end;
+}
+@media screen and (max-width: 510px){
+    .popup__close-button-image{
+        height: 30px;
+        width: 30px;
+        transform: rotate(45deg);
+    }
+}

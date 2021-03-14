@@ -1,0 +1,32 @@
+.profile__avatar{
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    background-image: url();
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    object-fit: cover;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+/*.profile__avatar::before:hover{
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    opacity: .5;
+    background-color: black;
+    background-image: url(../../../images/edit-button.svg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+*/
+@media screen and (max-width: 768px){
+    
+    .profile__avatar{
+        margin-left: auto;
+        margin-right: auto;
+    }}
