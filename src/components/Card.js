@@ -9,7 +9,7 @@ function Card(props){
       }  
       
     return (
-        <div className="gallery__item" key={props.card._id}>
+        <div className="gallery__item" >
             <img className="gallery__pic" onClick={handleClick} src={props.card.link} alt="Изображение" />
             <button className="gallery__delete-button" type="button">
                 <img className="gallery__delete-button-pic"  src={trashCan} alt='Удалить' onClick={props.onDeleteCard}/>

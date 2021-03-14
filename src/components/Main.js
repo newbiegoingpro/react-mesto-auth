@@ -45,7 +45,7 @@ function Main(props){
         <section className='gallery'>
             
                {cards.map((card, i) => (
-                <Card onDeleteCard={props.onDeleteCard} onCardClick={props.onCardClick} card={card}/> ))}
+                <Card key={card._id} onDeleteCard={props.onDeleteCard} onCardClick={props.onCardClick} card={card}/> ))}
             
         </section>
   
