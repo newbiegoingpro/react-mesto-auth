@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import add from '../images/add-button.svg';
 import Footer from './Footer.js';
 import Header from './Header.js';
@@ -14,7 +13,7 @@ function App() {
   const [isAddPlacePopupOpen, handleAddPopupVisibility] = React.useState(false)
   const [isEditAvatarPopupOpen, handleAvatarPopupVisibility] = React.useState(false)
   const [isDeletePopupOpen, handleDeleteVisibility] = React.useState(false)
-  const [selectedCard, setSelectedCard] = React.useState('')
+  const [selectedCard, setSelectedCard] = React.useState({link: '', name: ''})
   
 
   function handleCardClick (data){
@@ -40,7 +39,7 @@ function App() {
     handleEditPopupVisibility(false)
     handleAvatarPopupVisibility(false)
     handleDeleteVisibility(false)
-    setSelectedCard(false)
+    setSelectedCard({link: '', name: ''})
   }
 
   return (

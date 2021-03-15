@@ -1,13 +1,13 @@
 import avatar from '../images/kusto.jpg';
 import edit from '../images/edit-button.svg';
-import api from '../components/utils/Api'
+import api from '../utils/Api'
 import React from 'react';
 import Card from '../components/Card';
 
 function Main(props){
     const [userName, setUserName] = React.useState('')
     const [userDescription, setUserDescription] = React.useState('')
-    const [userAvatar, setUserAvatar] = React.useState()
+    const [userAvatar, setUserAvatar] = React.useState('')
     const [cards, setCards] = React.useState([])
     React.useEffect(() => {
         api.getUserInfo()
@@ -16,8 +16,10 @@ function Main(props){
                 setUserDescription(data.about)    
                 setUserAvatar(data.avatar)
             })
+            .catch(err => alert(err))
         api.getInitialCards()
-            .then(data => setCards(data))        
+            .then(data => setCards(data)) 
+            .catch(err => alert(err))       
     }, [])
    
     return (
@@ -25,9 +27,9 @@ function Main(props){
 
         <section className='profile'>
             <div className="profile__avatar-container">
-                <img className='profile__avatar' style={{backgroundImage: `url(${userAvatar})` }} />
+                <img className='profile__avatar' src={userAvatar} alt='Аватар пользователя'/>
                 <button className="profile__avatar-button" type="button" onClick={props.onEditAvatar}>
-                <img className="profile__avatar-button-pic" src={edit}/>
+                <img className="profile__avatar-button-pic" src={edit} alt='Кнопка редактирования аватара'/>
                 </button>
             </div>
             <div className='profile__info'>
@@ -44,7 +46,7 @@ function Main(props){
 
         <section className='gallery'>
             
-               {cards.map((card, i) => (
+               {cards.map((card) => (
                 <Card key={card._id} onDeleteCard={props.onDeleteCard} onCardClick={props.onCardClick} card={card}/> ))}
             
         </section>

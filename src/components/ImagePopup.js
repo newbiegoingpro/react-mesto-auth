@@ -1,11 +1,11 @@
-import { render } from "@testing-library/react"
+
 import add from '../images/add-button.svg';
 function ImagePopup(props){
 
    
 
     return(
-        <div className={`popup closeupPopup ${props.card ? 'popup_opened' : ' '}`} >
+        <div className={`popup closeupPopup ${(props.card.link.length > 1) ? 'popup_opened' : ' '}`} >
             <div className='closeupPopup__container'>
                 <button className='popup__close-button closeupPopup__close-button' type="button" onClick={props.onClose}>
                     <img className="popup__close-button-image" src={add} alt="Крестик"/>
