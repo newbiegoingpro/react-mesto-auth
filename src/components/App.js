@@ -8,8 +8,8 @@ import ImagePopup from './ImagePopup.js';
 import EditProfilePopup from './EditProfilePopup.js';
 import EditAvatarPopup from './EditAvatarPopup.js';
 import AddPlacePopup from './AddPlacePopup.js';
-import api from '../utils/Api';
-import { CurrentUserContext } from '../contexts/currentUser';
+import api from '../utils/api';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 
 function App() {

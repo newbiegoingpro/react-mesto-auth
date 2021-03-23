@@ -1,9 +1,9 @@
 import avatar from '../images/kusto.jpg';
 import edit from '../images/edit-button.svg';
-import api from '../utils/Api'
+import api from '../utils/api'
 import React from 'react';
 import Card from '../components/Card';
-import { CurrentUserContext } from '../contexts/currentUser';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function Main(props) {
     const currentUser = React.useContext(CurrentUserContext)

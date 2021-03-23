@@ -1,5 +1,5 @@
 import trashCan from '../images/TrashSvg.svg';
-import {CurrentUserContext} from '../contexts/currentUser';
+import {CurrentUserContext} from '../contexts/CurrentUserContext';
 import React from 'react';
 
 function Card(props) {
