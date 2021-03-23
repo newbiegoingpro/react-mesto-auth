@@ -1,6 +1,16 @@
 .gallery__like-button_active{
     background-image: url(../../../images/likeActive.svg);
     color: rgb(0, 0, 0);
-   
-    
+    align-self: center;
+    margin-left: auto;
+    padding-right: 23px;
+    width: 21px;
+    height: 17px;
+    background-repeat: no-repeat;
+    border: none;
+    outline: none;
+}
+.gallery__like-button_active:hover{
+    cursor: pointer;
+    opacity: .5;
 }

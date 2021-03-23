@@ -9,6 +9,7 @@
 @import url(./__item_deleted/gallery__item_deleted.css);
 @import url(./__like-container/gallery__like-container.css);
 @import url(./__like-counter/gallery__like-counter.css);
+@import url(./__delete-button/_hidden/gallery__delete-button_hidden.css);
 .gallery{
     width: 100%;
     margin-top: 47.25px;

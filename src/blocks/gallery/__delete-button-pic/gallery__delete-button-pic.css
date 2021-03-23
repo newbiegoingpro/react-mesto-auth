@@ -1,6 +1,5 @@
 .gallery__delete-button{
-    background: none;
-    
+    background: none;   
 }
 .gallery__delete-button:hover{
     opacity: .5;
