@@ -6,13 +6,16 @@ function AddPlacePopup(props) {
 
     const [place, setPlace] = React.useState('');
     const [link, setLink] = React.useState('');
-
+    /*const [placeValidity, isPlaceValid] = React.useState(false);
+    const [linkValidity, isLinkValid] = React.useState(false);
+    const [linkValidity, isLinkValid] = React.useState(false);
+*/
     function handlePlaceInput(e){
         setPlace(e.target.value);
-    }
+    };
     function handleLinkInput(e){
         setLink(e.target.value);
-    }
+    };
     function handleSubmit(e) {
         e.preventDefault();
 
@@ -20,7 +23,10 @@ function AddPlacePopup(props) {
             name: place,
             link
         })
-    }
+
+        setPlace('');
+        setLink('');
+    };
 
 
     return (

@@ -1,0 +1,10 @@
+.login__link{
+    width: 100%;
+    box-shadow: none;
+    height: 50px;
+    border-radius: 2px;
+    color: black;
+    border: none;
+    margin-top: 200px;
+    font-weight: 400;
+}

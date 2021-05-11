@@ -1,0 +1,14 @@
+@import url(./__text/infoTooltip__text.css);
+@import url(./__image/infoTooltip__image.css);
+@import url(./__container/infoTooltip__container.css);
+.infoTooltip{
+    position: fixed;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s linear;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+}

@@ -1,0 +1,7 @@
+.header__box{
+    display: flex;
+    flex-direction: row;
+    margin-right: 30px;
+    min-width: 200px;
+    justify-content: space-between;
+}

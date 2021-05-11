@@ -1,0 +1,9 @@
+.register__button-container{
+    width: 100%;
+}
+@media screen and (max-width: 510px) {
+    .register__button-container{
+       width: 85%;
+    }
+    
+}

@@ -7,6 +7,9 @@
 @import url(./blocks/gallery/gallery.css);
 @import url(./blocks/footer/footer.css);
 @import url(./blocks/popup/popup.css);
-@import url(./blocks/popup-add/popup-add.css);
 @import url(./blocks/closeupPopup/closeupPopup.css);
 @import url(./blocks/popup/_opened/popup_opened.css);
+@import url(./blocks/login/login.css);
+@import url(./blocks/register/register.css);
+@import url(./blocks/infoTooltip/infoTooltip.css);
+@import url(./blocks/infoTooltip/_visible/infoTooltip_visible.css);
