@@ -47,7 +47,7 @@ function App() {
 
   React.useEffect(() => {
     tokenCheck();
-  })
+  }, [])
 
   function tokenCheck() {
     fetch(`https://auth.nomoreparties.co/users/me`, {
