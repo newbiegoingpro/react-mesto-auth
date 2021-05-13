@@ -66,7 +66,7 @@ function App() {
       passwordInput('');
       handleLogin();
       history.push('/');
-
+      setMail(email)
     }
     )
   }
