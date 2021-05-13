@@ -39,15 +39,66 @@ function App() {
       .then(data => {
         setCurrentUserInfo(data)
       })
-      .catch(err => alert(err))
+      .catch(err => alert(err));
     api.getInitialCards()
       .then(data => setCards(data))
-      .catch(err => alert(err))
+      .catch(err => alert(err));
+
+    tokenCheck();  
   }, [])
 
-  React.useEffect(() => {
-    tokenCheck();
-  }, [])
+
+  function onLogin({ email, password }) {
+    return fetch(`https://auth.nomoreparties.co/signin`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email, password })
+    }).then((res) => {
+      if (res.ok) {
+        return res.json()
+      }
+      return Promise.reject(`err : ${res.status}`)
+    }).then((data) => {
+      localStorage.setItem('token', data.token)
+      emailInput('');
+      passwordInput('');
+      handleLogin();
+      history.push('/');
+
+    }
+    )
+  }
+
+  function onRegister({ email, password }){
+    return fetch(`https://auth.nomoreparties.co/signup`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email, password })
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+        
+      }
+      return Promise.reject(`err : ${res.status}`)
+    }).then((data) => {
+
+      handleSuccessPopupVisibility();
+      history.push('/signin')
+    }).catch((err) =>{
+      handleFailPopupVisibility()
+    })
+      
+  }
+
+  function onSignOut() {
+    localStorage.removeItem('token');
+    setMail('');
+    history.push('/signin');
+  }
 
   function tokenCheck() {
     fetch(`https://auth.nomoreparties.co/users/me`, {
@@ -153,63 +204,9 @@ function App() {
     setSelectedCard({ link: '', name: '' })
   };
 
-  function onLogin({ email, password }) {
-    return fetch(`https://auth.nomoreparties.co/signin`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ email, password })
-    }).then((res) => {
-      if (res.ok) {
-        return res.json()
-      }
-      return Promise.reject(`err : ${res.status}`)
-    }).then((data) => {
-      localStorage.setItem('token', data.token)
-      emailInput('');
-      passwordInput('');
-      handleLogin();
-      history.push('/');
-
-    }
-    )
-  }
-
-  function onRegister({ email, password }){
-    return fetch(`https://auth.nomoreparties.co/signup`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ email, password })
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-        
-      }
-      return Promise.reject(`err : ${res.status}`)
-    }).then((data) => {
-
-      handleSuccessPopupVisibility();
-      history.push('/signin')
-    }).catch((err) =>{
-      handleFailPopupVisibility()
-    })
-      
-  }
-
-  function onSignOut() {
-    localStorage.removeItem('token');
-    setMail('');
-    history.push('/signin');
-  }
-
-
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="App">
-
         <Switch>
           <ProtectedRoute loggedIn={loggedIn} component={Main} exact path="/"
             onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick}
@@ -223,11 +220,7 @@ function App() {
           <Route path="/signup">
             <Register onRegister={onRegister} history={history} />
           </Route>
-
-
         </Switch>
-
-
         <EditProfilePopup isopen={isEditProfilePopupOpen} onUpdateUser={handleUpdateUser} onClose={closeAllPopups} isshort={false} />
         <AddPlacePopup isshort={false} isopen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddNewCard={handleAddNewPlace} />
         <EditAvatarPopup onUpdateAvatar={handleUpdateAvatar} isopen={isEditAvatarPopupOpen} onClose={closeAllPopups} isshort={true} />
