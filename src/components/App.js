@@ -44,7 +44,7 @@ function App() {
       .then(data => setCards(data))
       .catch(err => alert(err));
 
-    tokenCheck();  
+    tokenCheck();
   }, [])
 
 
@@ -71,7 +71,7 @@ function App() {
     )
   }
 
-  function onRegister({ email, password }){
+  function onRegister({ email, password }) {
     return fetch(`https://auth.nomoreparties.co/signup`, {
       method: 'POST',
       headers: {
@@ -81,17 +81,17 @@ function App() {
     }).then((res) => {
       if (res.ok) {
         return res.json();
-        
+
       }
       return Promise.reject(`err : ${res.status}`)
     }).then((data) => {
 
       handleSuccessPopupVisibility();
       history.push('/signin')
-    }).catch((err) =>{
+    }).catch((err) => {
       handleFailPopupVisibility()
     })
-      
+
   }
 
   function onSignOut() {
@@ -101,25 +101,28 @@ function App() {
   }
 
   function tokenCheck() {
-    fetch(`https://auth.nomoreparties.co/users/me`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      }
-    }).then((res) => {
-      if (res.ok) {
-        return res.json()
-      }
-      return Promise.reject(`err : ${res.status}`)
-    }).then((data) => {
-      if (data) {
-        console.log(data.data.email)
-        setMail(data.data.email)
-        handleLogin();
-        history.push('/')
-      }
-    })
+    if (localStorage.getItem('token')) {
+      fetch(`https://auth.nomoreparties.co/users/me`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      }).then((res) => {
+        if (res.ok) {
+          return res.json()
+        }
+        return Promise.reject(`err : ${res.status}`)
+      }).then((data) => {
+        if (data) {
+          console.log(data.data.email)
+          setMail(data.data.email)
+          handleLogin();
+          history.push('/')
+        }
+      })
+    }
+
   }
 
   function handleLogin() {
@@ -227,8 +230,8 @@ function App() {
         <PopupWithForm title='Вы уверены?' isshort={true} button='Да' name='delete' isopen={isDeletePopupOpen} onClose={closeAllPopups}>
         </PopupWithForm>
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
-        <PopupSuccess isopen={isSuccessPopupOpen} onClose={closeAllPopups}/>
-        <PopupFail isopen={isFailPopupOpen} onClose={closeAllPopups}/>
+        <PopupSuccess isopen={isSuccessPopupOpen} onClose={closeAllPopups} />
+        <PopupFail isopen={isFailPopupOpen} onClose={closeAllPopups} />
       </div>
     </CurrentUserContext.Provider>
   );
