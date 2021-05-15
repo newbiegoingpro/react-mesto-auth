@@ -46,8 +46,8 @@ function Header(props) {
     return (
         <>
 
-            <header className='header'>
-                <img className='header__logo' src={logo} alt="Лого" />
+            <header className={` header ${isMenuOpen && 'header_opened'}`}>
+                <img className={` header__logo ${isMenuOpen && 'header__logo_opened'}`} src={logo} alt="Логотип" />
                 <Route exact path="/signup" >
                     <Link className="header__link" to='/signin'>
                         Войти
