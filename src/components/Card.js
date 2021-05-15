@@ -18,7 +18,7 @@ function Card(props) {
 
     return (
         <div className="gallery__item" >
-            <img className="gallery__pic" onClick={handleClick} src={props.card.link} alt="Изображение" />
+            <img className="gallery__pic" onClick={handleClick} src={props.card.link} alt={props.card.name} />
             <button className={`${isMine ? `gallery__delete-button` : `gallery__delete-button_hidden`}`} type="button">
                 <img className="gallery__delete-button-pic" src={trashCan} alt='Удалить' onClick={handleDeleteClick} />
             </button>

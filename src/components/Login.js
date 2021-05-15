@@ -34,7 +34,7 @@ function Login(props) {
                         name="password" placeholder="Пароль" type="password"
                         value={password} onChange={handlePasswordInput} />
                     <div className="login__button-container">
-                        <button type="submit" onSubmit={handleSubmit}  className="login__link">Войти</button>
+                        <button type="submit" className="login__link">Войти</button>
                     </div>
                 </form>
 

@@ -8,7 +8,7 @@ function Hamburger(props) {
             
             
             
-            <Menu email={props.email} onSignOut={props.onSignOut} isopen={props.isopen}/>
+            <Menu email={props.email} onSignOut={props.onSignOut} isOpen={props.isOpen}/>
         </>
         
     )

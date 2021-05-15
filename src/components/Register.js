@@ -26,7 +26,7 @@ function Register(props) {
 
                 <input className="register__input" placeholder="Пароль" required type="password" value={password} onChange={handlePasswordInput}  />
                 <div className="register__button-container">
-                    <button type="submit" /*onSubmit={this.handleSubmit} */ className="register__link">Зарегистрироваться</button>
+                    <button type="submit" className="register__link">Зарегистрироваться</button>
                 </div>
             </form>
             <div className="register__signin">

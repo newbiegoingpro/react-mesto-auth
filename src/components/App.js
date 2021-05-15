@@ -9,15 +9,15 @@ import EditProfilePopup from './EditProfilePopup.js';
 import EditAvatarPopup from './EditAvatarPopup.js';
 import AddPlacePopup from './AddPlacePopup.js';
 import api from '../utils/api';
+import auth from '../utils/auth';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import { Route, Switch, Redirect, withRouter, useHistory } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
 import Register from './Register';
 import Login from './Login';
 import InfoTooltip from './InfoTooltip';
-import PopupFail from './PopupFail';
-import PopupSuccess from './PopupSuccess';
-
+import imgSuccess from '../images/Union.svg';
+import imgFail from '../images/UnionFail.svg';
 function App() {
   const history = useHistory();
   const [isEditProfilePopupOpen, handleEditPopupVisibility] = React.useState(false);
@@ -31,8 +31,8 @@ function App() {
   const [email, emailInput] = React.useState('');
   const [password, passwordInput] = React.useState('');
   const [headerMail, setMail] = React.useState('');
-  const [isSuccessPopupOpen, setSuccessPopupVisibility] = React.useState(false);
-  const [isFailPopupOpen, setFailPopupVisibility] = React.useState(false);
+  const [isOpen, setInfoTooltipVisibility] = React.useState(false);
+  const [isSuccessful, setRegistrationResult] = React.useState(false);
 
   React.useEffect(() => {
     api.getUserInfo()
@@ -44,53 +44,32 @@ function App() {
       .then(data => setCards(data))
       .catch(err => alert(err));
 
-    tokenCheck();
+    tokenCheck()    
   }, [])
 
 
   function onLogin({ email, password }) {
-    return fetch(`https://auth.nomoreparties.co/signin`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ email, password })
-    }).then((res) => {
-      if (res.ok) {
-        return res.json()
-      }
-      return Promise.reject(`err : ${res.status}`)
-    }).then((data) => {
-      localStorage.setItem('token', data.token)
-      emailInput('');
-      passwordInput('');
-      handleLogin();
-      history.push('/');
-      setMail(email)
-    }
-    )
+    auth.onLogin({ email, password })
+      .then((data) => {
+        localStorage.setItem('token', data.token)
+        emailInput('');
+        passwordInput('');
+        handleLogin();
+        history.push('/');
+        setMail(email)
+      }).catch(err => alert(err))
   }
 
   function onRegister({ email, password }) {
-    return fetch(`https://auth.nomoreparties.co/signup`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ email, password })
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-
-      }
-      return Promise.reject(`err : ${res.status}`)
-    }).then((data) => {
-
-      handleSuccessPopupVisibility();
-      history.push('/signin')
-    }).catch((err) => {
-      handleFailPopupVisibility()
-    })
+    auth.onRegister({ email, password })
+      .then((data) => {
+        setRegistrationResult(true)
+        setInfoTooltipVisibility(true)
+        history.push('/signin')
+      }).catch((err) => {
+        setInfoTooltipVisibility(true)
+        setRegistrationResult(false)
+      })
 
   }
 
@@ -101,28 +80,18 @@ function App() {
   }
 
   function tokenCheck() {
-    if (localStorage.getItem('token')) {
-      fetch(`https://auth.nomoreparties.co/users/me`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
-      }).then((res) => {
-        if (res.ok) {
-          return res.json()
-        }
-        return Promise.reject(`err : ${res.status}`)
-      }).then((data) => {
-        if (data) {
-          console.log(data.data.email)
-          setMail(data.data.email)
-          handleLogin();
-          history.push('/')
-        }
-      })
+    const token = localStorage.getItem('token');
+    if (token) {
+      auth.tokenCheck(token)
+        .then((data) => {
+          if (data) {
+            console.log(data.data.email)
+            setMail(data.data.email)
+            handleLogin();
+            history.push('/')
+          }
+        }).catch(err => alert(err))
     }
-
   }
 
   function handleLogin() {
@@ -161,12 +130,12 @@ function App() {
   function handleDeleteClick() {
     handleDeleteVisibility(true)
   };
-  function handleSuccessPopupVisibility() {
-    setSuccessPopupVisibility(true);
-  };
-  function handleFailPopupVisibility() {
-    setFailPopupVisibility(true);
-  };
+  // function handleSuccessPopupVisibility() {
+  //   setSuccessPopupVisibility(true);
+  // };
+  // function handleFailPopupVisibility() {
+  //   setFailPopupVisibility(true);
+  //};
 
   function handleUpdateUser(data) {
     api.updateUserInfo(JSON.stringify(data))
@@ -198,12 +167,14 @@ function App() {
   };
 
   function closeAllPopups() {
+
     handleAddPopupVisibility(false);
     handleEditPopupVisibility(false);
     handleAvatarPopupVisibility(false);
     handleDeleteVisibility(false);
-    setSuccessPopupVisibility(false);
-    setFailPopupVisibility(false);
+    setInfoTooltipVisibility(false)
+    // setSuccessPopupVisibility(false);
+    // setFailPopupVisibility(false);
     setSelectedCard({ link: '', name: '' })
   };
 
@@ -215,7 +186,7 @@ function App() {
             onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick}
             onDeleteCard={handleDeleteClick} onCardClick={handleCardClick} cards={cards}
             onCardLike={handleCardLike} onCardDelete={handleDeleteCard} onSignOut={onSignOut} headerMail={headerMail}>
-            <Footer />
+
           </ProtectedRoute>
           <Route path="/signin">
             <Login onLogin={onLogin} email={email} emailInput={emailInput} password={password} passwordInput={passwordInput} history={history} />
@@ -224,14 +195,14 @@ function App() {
             <Register onRegister={onRegister} history={history} />
           </Route>
         </Switch>
-        <EditProfilePopup isopen={isEditProfilePopupOpen} onUpdateUser={handleUpdateUser} onClose={closeAllPopups} isshort={false} />
-        <AddPlacePopup isshort={false} isopen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddNewCard={handleAddNewPlace} />
-        <EditAvatarPopup onUpdateAvatar={handleUpdateAvatar} isopen={isEditAvatarPopupOpen} onClose={closeAllPopups} isshort={true} />
-        <PopupWithForm title='Вы уверены?' isshort={true} button='Да' name='delete' isopen={isDeletePopupOpen} onClose={closeAllPopups}>
+        <EditProfilePopup isOpen={isEditProfilePopupOpen} onUpdateUser={handleUpdateUser} onClose={closeAllPopups} isShort={false} />
+        <AddPlacePopup isShort={false} isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddNewCard={handleAddNewPlace} />
+        <EditAvatarPopup onUpdateAvatar={handleUpdateAvatar} isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} isShort={true} />
+        <PopupWithForm title='Вы уверены?' isShort={true} button='Да' name='delete' isOpen={isDeletePopupOpen} onClose={closeAllPopups}>
         </PopupWithForm>
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
-        <PopupSuccess isopen={isSuccessPopupOpen} onClose={closeAllPopups} />
-        <PopupFail isopen={isFailPopupOpen} onClose={closeAllPopups} />
+        
+        <InfoTooltip isOpen={isOpen} isSuccessful={isSuccessful} onClose={closeAllPopups} />
       </div>
     </CurrentUserContext.Provider>
   );

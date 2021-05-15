@@ -26,53 +26,42 @@ function Header(props) {
     function getLoggedHeaderLayout() {
         if (width.width > 425) {
             return (
-                <header className='header'>
-                    <img className='header__logo' src={logo} alt="Лого" />
-                    <div className="header__box">
-                        <p className="header__email">{props.headerMail}</p>
-                        <Link className="header__link" onClick={props.onSignOut}>Выйти</Link>
-                    </div>
-
-                </header>)
+                <div className="header__box">
+                    <p className="header__email">{props.headerMail}</p>
+                    <Link className="header__link" onClick={props.onSignOut}>Выйти</Link>
+                </div>
+            )
         } else {
             return (
                 <>
-                    <Menu email={props.headerMail} onSignOut={props.onSignOut} isopen={isMenuOpen} />
-                    <header className='header'>
-                        <img className='header__logo' src={logo} alt="Лого" />
-                        <img
-                            className={` ${isMenuOpen ? 'header__hamburger-btn_active' : 'header__hamburger-btn'}`}
-                            src={isMenuOpen ? add : menuPic} alt='кнопка меню' onClick={handleMenuClick}
-                        />
-                        
-
-                    </header>
-
+                    <Menu email={props.headerMail} onSignOut={props.onSignOut} isOpen={isMenuOpen} />
+                    <img
+                        className={` ${isMenuOpen ? 'header__hamburger-btn_active' : 'header__hamburger-btn'}`}
+                        src={isMenuOpen ? add : menuPic} alt='кнопка меню' onClick={handleMenuClick}
+                    />
                 </>
             )
         }
     }
     return (
         <>
-            <Route path="/signup" >
-                <header className='header'>
-                    <img className='header__logo' src={logo} alt="Лого" />
+
+            <header className='header'>
+                <img className='header__logo' src={logo} alt="Лого" />
+                <Route exact path="/signup" >
                     <Link className="header__link" to='/signin'>
                         Войти
-                    </Link>
-                </header>
-            </Route>
-            <Route path="/signin" >
-                <header className='header'>
-                    <img className='header__logo' src={logo} alt="Лого" />
+                        </Link>
+                </Route>
+                <Route path="/signin" >
                     <Link className="header__link" to='/signup'>
                         Регистрация
-                    </Link>
-                </header>
-            </Route>
-            <Route exact path="/" >
-                {getLoggedHeaderLayout()}
-            </Route>
+                        </Link>
+                </Route>
+                <Route exact path="/" >
+                    {getLoggedHeaderLayout()}
+                </Route>
+            </header>
 
         </>
 
