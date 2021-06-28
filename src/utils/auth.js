@@ -58,7 +58,7 @@ export class Auth {
 
 
 const auth = new Auth({
-    baseUrl: 'https://auth.nomoreparties.co',
+    baseUrl: 'https://shvaika.nick.mestoapp.nomoredomains.club',
 
 });
 export default auth;
