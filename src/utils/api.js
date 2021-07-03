@@ -117,7 +117,6 @@ const api = new Api({
   baseUrl: 'https://shvaika.nick.mestoapp.nomoredomains.club',
   headers: {
     "Content-Type": "application/json",
-    "Authorization": "5eba1b30-a022-4f10-bfa8-56b458d9d188"
   }
 });
 
