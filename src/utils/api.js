@@ -87,7 +87,7 @@ export class Api {
   }
 
   changeLikeCardStatus(_id, isLiked) {
-    return fetch(`${this.baseUrl}/cards/likes/${_id}`, {
+    return fetch(`${this.baseUrl}/cards/${_id}/likes`, {
       method: (isLiked ? 'PUT' : 'DELETE'),
       headers: this.headers
     })
@@ -100,7 +100,7 @@ export class Api {
   }
 
   removeLike(_id) {
-    return fetch(`${this.baseUrl}/cards/likes/${_id}`, {
+    return fetch(`${this.baseUrl}/cards/${_id}/likes`, {
       method: 'DELETE',
       headers: this.headers
     })
@@ -117,6 +117,7 @@ const api = new Api({
   baseUrl: 'https://shvaika.nick.mestoapp.nomoredomains.club',
   headers: {
     "Content-Type": "application/json",
+    "Authorization": `Bearer ${localStorage.getItem('token')}`
   }
 });
 

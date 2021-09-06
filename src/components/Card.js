@@ -13,8 +13,8 @@ function Card(props) {
         props.onDeleteCard(props.card);
     }
     const currentUser = React.useContext(CurrentUserContext);
-    const isMine = props.card.owner._id === currentUser._id;
-    const isLiked = props.card.likes.some((i) => i._id === currentUser._id);
+    const isMine = props.card.owner === currentUser._id;
+    const isLiked = props.card.likes.some((i) => i === currentUser._id);
 
     return (
         <div className="gallery__item" >
