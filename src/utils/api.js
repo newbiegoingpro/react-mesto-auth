@@ -114,7 +114,7 @@ export class Api {
 }
 
 const api = new Api({
-  baseUrl: 'https://shvaika.nick.mestoapp.nomoredomains.club',
+  baseUrl: 'https://api.mestoAppShvayka.nomoredomains.monster',
   headers: {
     "Content-Type": "application/json",
     "Authorization": `Bearer ${localStorage.getItem('token')}`
